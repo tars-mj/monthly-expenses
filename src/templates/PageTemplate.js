@@ -76,6 +76,10 @@ const StyledMainLogo = styled.div`
   background-color: ${({ theme }) => theme.navyBlueHover};
 `;
 
+const StyledContent = styled.div`
+  grid-area: main;
+`;
+
 const PageTemplate = ({ children }) => (
   <StyledBoardLayout>
     <StyledMenu>
@@ -105,7 +109,7 @@ const PageTemplate = ({ children }) => (
         </ButtonMenu>
       </WrapperButton>
     </StyledMenu>
-    {children}
+    <StyledContent>{children}</StyledContent>
   </StyledBoardLayout>
 );
 

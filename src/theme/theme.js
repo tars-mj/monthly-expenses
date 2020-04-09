@@ -10,7 +10,7 @@ export const theme = {
   red: '#FF2E2E',
   fontThin: 300,
   fontLight: 400,
-  fontBold: 600,
+  fontBold: 700,
   fontSize: {
     xxs: '1rem',
     xs: '1.2rem',
