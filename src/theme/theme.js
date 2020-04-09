@@ -1,0 +1,22 @@
+export const theme = {
+  navyBlue: '#0E1C36',
+  navyBlueHover: '#1A2A48',
+  blue: '#135899',
+  lightBlue: '#AFCBFF',
+  green: '#0E7C7B',
+  aquamarine: '#17BEBB',
+  white: '#FDFDFD',
+  gray: '#EDEDED',
+  red: '#FF2E2E',
+  fontThin: 300,
+  fontLight: 400,
+  fontBold: 600,
+  fontSize: {
+    xxs: '1rem',
+    xs: '1.2rem',
+    s: '1.6rem',
+    m: '2.1rem',
+    l: '2.4rem',
+    xl: '4rem',
+  },
+};
