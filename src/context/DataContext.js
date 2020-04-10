@@ -28,6 +28,11 @@ const initialState = {
   isLoading: false,
   selectedYear: 2020,
   selectedMonth: 4,
+  monthsClosed: [
+    { year: 2020, month: 1 },
+    { year: 2020, month: 2 },
+    { year: 2020, month: 3 },
+  ],
   expenses: [
     {
       id: 6621232,
@@ -49,7 +54,7 @@ const initialState = {
       deadline: 12,
       year: [2020],
       month: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-      history: [{ year: 2020, month: 2, status: 'completed', amount: 1100 }],
+      history: [],
       amountExpected: 1200,
       status: 'open',
     },
@@ -58,11 +63,10 @@ const initialState = {
       name: 'Opłata za szkołę',
       typePayment: 'auto',
       category: { id: 324234324, name: 'czynsz' },
-      deadline: 19,
+      deadline: 12,
       year: [2020],
       month: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-      complitedStatusPerMonth: [1, 2, 3, 4],
-      history: [{ year: 2020, month: 2, status: 'completed', amount: 80 }],
+      history: [],
       amountExpected: 80,
       status: 'open',
     },
@@ -77,13 +81,41 @@ const initialState = {
 
 // Constants
 const SET_LOADING = 'SET_LOADING';
+const ADD_CLOSE_MONTH = 'ADD_CLOSE_MONTH';
+const SELECT_MONTH = 'SELECT_MONTH';
+const ACCEPT_PAYMENT = 'ACCEPT_PAYMENT';
+const SET_SELECTED_YEAR = 'SET_SELECTED_YEAR';
 
 // Reducer
 const reducer = (state, action) => {
   switch (action.type) {
     case SET_LOADING:
       return { ...state, isLoading: action.payload.isLoading };
-
+    case ADD_CLOSE_MONTH:
+      return { ...state, monthsClosed: [...state.monthsClosed, action.payload] };
+    case SELECT_MONTH:
+      return { ...state, selectedMonth: action.payload.month };
+    case ACCEPT_PAYMENT:
+      console.log(action.payload);
+      return {
+        ...state,
+        expenses: [
+          ...state.expenses.map((ex) => {
+            if (ex.id === action.payload.id) {
+              ex.history.push({
+                year: action.payload.year,
+                month: action.payload.month,
+                status: action.payload.status,
+                amount: action.payload.amount,
+              });
+              return ex;
+            }
+            return ex;
+          }),
+        ],
+      };
+    case SET_SELECTED_YEAR:
+      return { ...state, selectedYear: action.payload.year };
     default:
       throw new Error();
   }
@@ -94,6 +126,47 @@ const DataProvider = ({ children }) => {
 
   // Actions
   const setLoading = ({ isLoading }) => dispatch({ type: SET_LOADING, payload: { isLoading } });
+
+  const addCloseMonth = ({ month, year }) => {
+    dispatch({
+      type: ADD_CLOSE_MONTH,
+      payload: {
+        year,
+        month,
+      },
+    });
+  };
+
+  const selectMonth = ({ month }) => {
+    dispatch({
+      type: SELECT_MONTH,
+      payload: {
+        month,
+      },
+    });
+  };
+
+  const acceptPayment = ({ id, year, month, status, amount }) => {
+    dispatch({
+      type: ACCEPT_PAYMENT,
+      payload: {
+        id,
+        year,
+        month,
+        status,
+        amount,
+      },
+    });
+  };
+
+  const setSelectedYear = ({ year }) => {
+    dispatch({
+      type: SET_SELECTED_YEAR,
+      payload: {
+        year,
+      },
+    });
+  };
 
   useEffect(() => {
     // if (typeof window.localStorage !== 'undefined') {
@@ -107,10 +180,15 @@ const DataProvider = ({ children }) => {
   return (
     <DataContext.Provider
       value={{
+        monthsClosed: state.monthsClosed,
         selectedYear: state.selectedYear,
         selectedMonth: state.selectedMonth,
         expenses: state.expenses,
         categories: state.categories,
+        addCloseMonth,
+        selectMonth,
+        acceptPayment,
+        setSelectedYear,
       }}
     >
       {children}

@@ -4,6 +4,6 @@ export const statusPaymentConst = {
 };
 
 export const typePaymentConst = {
-  automate: 'automate',
+  auto: 'auto',
   manual: 'manual',
 };

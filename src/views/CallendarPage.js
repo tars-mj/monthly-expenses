@@ -2,9 +2,63 @@ import React, { useContext, useState, useEffect } from 'react';
 import { DataContext } from '../context/DataContext';
 import PageTemplate from '../templates/PageTemplate';
 import styled, { css } from 'styled-components';
+import PaymentCard from '../components/organisms/PaymentCard';
+import Button from '../components/atoms/Button';
+import Modal from '../components/atoms/Modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHourglassHalf, faCheck, faExclamation } from '@fortawesome/free-solid-svg-icons';
-import { statusPaymentConst, typePaymentConst } from '../constants/index';
+import { faAngleRight, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
+
+const months = [
+  {
+    month: 1,
+    name: 'January',
+  },
+  {
+    month: 2,
+    name: 'February',
+  },
+  {
+    month: 3,
+    name: 'March',
+  },
+  {
+    month: 4,
+    name: 'April',
+  },
+  {
+    month: 5,
+    name: 'May',
+  },
+  {
+    month: 6,
+    name: 'June',
+  },
+  {
+    month: 7,
+    name: 'July',
+  },
+  {
+    month: 8,
+    name: 'August',
+  },
+  {
+    month: 9,
+    name: 'September',
+  },
+  {
+    month: 10,
+    name: 'October',
+  },
+  {
+    month: 11,
+    name: 'November',
+  },
+  {
+    month: 12,
+    name: 'December',
+  },
+];
+
 const StyledWrapper = styled.div`
   height: 100vh;
   display: grid;
@@ -97,202 +151,118 @@ const StyledContent = styled.div`
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding: 40px;
+  padding: 4rem;
 `;
 
-const StyledCard = styled.section`
-  width: 100%;
-  max-width: 1200px;
-  background-color: ${({ theme }) => theme.white};
-  border-radius: 5px;
-  box-shadow: 0 10px 15px -15px hsla(0, 0%, 0%, 0.4);
-
-  ul:first-child {
-    color: ${({ theme }) => theme.lightBlue};
-    font-weight: ${({ theme }) => theme.fontBold};
-    font-size: ${({ theme }) => theme.fontSize.s};
-    background-color: ${({ theme }) => theme.blue};
-    border-radius: 5px 5px 0 0;
-    grid-column: 1 / -1;
-    height: 100%;
-  }
-
-  div {
-    background-color: ${({ theme }) => theme.white};
-    border-radius: 0 0 5px 5px;
-    height: 60px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-`;
-
-const StyledCardRow = styled.ul`
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) repeat(3, 120px) 80px;
-  grid-auto-rows: 40px;
-  align-items: center;
-  list-style-type: none;
-  padding: 10px;
-  border-top: 1px solid ${({ theme }) => theme.gray};
-  transition: background-color 0.15s ease-out;
-  color: ${({ theme }) => theme.navyBlue};
-  font-weight: ${({ theme }) => theme.fontLight};
-  font-size: ${({ theme }) => theme.fontSize.s};
+const StyledYearBtn = styled.div`
+  cursor: pointer;
+  padding: 3px;
+  transition: all 0.15s ease-in;
+  border-radius: 4px;
   &:hover {
-    background-color: ${({ theme }) => theme.gray};
-  }
-
-  li:last-child {
-    justify-self: center;
+    padding: 5px;
+    background-color: ${({ theme }) => theme.blue};
+    color: ${({ theme }) => theme.white};
   }
 `;
 
-const PaymentCard = () => {
-  const { selectedYear, selectedMonth, expenses } = useContext(DataContext);
-  const [filteredData, setFilteredData] = useState([]);
-
-  const selectData = () => {
-    const filterData = expenses.filter(
-      (ex) => ex.year.indexOf(selectedYear) !== -1 && ex.month.indexOf(selectedMonth) !== -1,
-    );
-    setFilteredData(filterData);
-  };
-
-  useEffect(() => {
-    selectData();
-  }, []);
-
-  const selectStatusIcon = (history, deadline, typePayment) => {
-    const findStatus = history.find((x) => x.month === selectedMonth);
-    let status = findStatus ? findStatus.status : statusPaymentConst.waiting;
-    let icon = faHourglassHalf;
-    let deadlineComing = false;
-
-    const margin = 3 * 24 * 60 * 60 * 1000; //days to deadline, days * hours * min * sec * miliseconds
-    const currentDate = new Date().getTime();
-    const currentDay = new Date().getDate();
-    const deadlineDate = new Date(`${selectedYear}-${selectedMonth}-${deadline}`).getTime();
-    deadlineComing = currentDate - (deadlineDate - margin) >= 0;
-
-    //if status is not set to paid show deadline warrning
-    if (status === statusPaymentConst.completed) {
-      deadlineComing = false;
-    }
-
-    //check type payment - if auto set deadline to false
-    if (typePayment === 'auto' && currentDay > deadline) {
-      deadlineComing = false;
-      status = statusPaymentConst.completed;
-    }
-
-    if (currentDate)
-      switch (status) {
-        case statusPaymentConst.waiting:
-          icon = faHourglassHalf;
-          break;
-        case statusPaymentConst.completed:
-          icon = faCheck;
-          break;
-        default:
-          icon = faHourglassHalf;
-          break;
-      }
-
-    //if payment type is automate, dont set icon on warrning if deadline is ended
-    console.log(deadlineComing, status, icon);
-    return {
-      deadlineComing,
-      status,
-      icon,
-    };
-  };
-
-  return (
-    <StyledCard>
-      <StyledCardRow>
-        <li>Payment name</li>
-        <li>Type</li>
-        <li>Amount</li>
-        <li>Date</li>
-        <li>Status</li>
-      </StyledCardRow>
-      {filteredData &&
-        filteredData.map(({ id, name, typePayment, amountExpected, deadline, history }) => (
-          <StyledCardRow key={id}>
-            <li>{name}</li>
-            <li>{typePayment}</li>
-            <li>{amountExpected}</li>
-            <li>{`${deadline}-${selectedMonth}-${selectedYear}`}</li>
-            <li>
-              <StatusIcon
-                status={selectStatusIcon(history, deadline, typePayment).status}
-                deadlineComing={selectStatusIcon(history, deadline, typePayment).deadlineComing}
-              >
-                <FontAwesomeIcon icon={selectStatusIcon(history, deadline, typePayment).icon} />
-              </StatusIcon>
-            </li>
-          </StyledCardRow>
-        ))}
-    </StyledCard>
-  );
-};
-
-const Button = styled.button`
-  display: flex;
-  color: ${({ theme }) => theme.white};
-  background-color: ${({ theme }) => theme.aquamarine};
-  border: 0;
+const StyledSelectedYear = styled.div`
+  margin: 0 auto;
+  width: 30rem;
+  height: 8rem;
+  display: grid;
+  grid-template-columns: 1fr 200px 1fr;
+  grid-template-rows: 1fr;
+  color: ${({ theme }) => theme.blue};
+  justify-items: center;
+  align-items: center;
+  font-size: ${({ theme }) => theme.fontSize.l};
   font-weight: ${({ theme }) => theme.fontBold};
+`;
+
+const StyledArrow = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: ${({ theme }) => theme.aquamarine};
+  background-color: ${({ theme }) => theme.white};
+  border: 0;
+  height: 100%;
+  width: 5rem;
   font-size: ${({ theme }) => theme.fontSize.s};
-  padding: 10px 30px;
-  border-radius: 5px;
+
   transition: background-color 0.15s ease-out;
   &:focus {
     outline: none;
   }
   &:hover {
-    background-color: ${({ theme }) => theme.green};
+    background-color: ${({ theme }) => theme.gray};
   }
 `;
 
-const StatusIcon = styled.span`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  width: 4rem;
-  height: 4rem;
-  font-size: ${({ theme }) => theme.fontSize.s};
-  color: ${({ theme }) => theme.white};
-  background-color: ${({ theme }) => theme.gray};
-
-  ${({ status }) =>
-    status === statusPaymentConst.completed &&
-    css`
-      background-color: ${({ theme }) => theme.aquamarine};
-    `};
-
-  ${({ deadlineComing }) =>
-    deadlineComing === true &&
-    css`
-      background-color: ${({ theme }) => theme.red};
-    `};
-`;
-
 const CallendarPage = () => {
+  const {
+    selectedYear,
+    selectedMonth,
+    expenses,
+    monthsClosed,
+    selectMonth,
+    setSelectedYear,
+  } = useContext(DataContext);
+  const [monthsStatus, setMonthsStatus] = useState([]);
+  const [monthName, setMonthName] = useState('');
+  const [modalYear, setModalYear] = useState(false);
+  const [year, setYear] = useState();
+
+  useEffect(() => {
+    monthlyStatus();
+    findMonthName();
+    setYear(selectedYear);
+  }, [selectedYear, selectedMonth, expenses, monthsClosed, selectMonth]);
+
+  const monthlyStatus = () => {
+    const filteredMonths = monthsClosed.filter((x) => x.year === selectedYear);
+    setMonthsStatus(filteredMonths);
+  };
+
+  const findMonthName = () => {
+    setMonthName(months.find((x) => x.month === selectedMonth).name);
+  };
+
+  const handleSelectYear = (type) => {
+    if (type === 'minus') {
+      setYear(year - 1);
+    }
+    if (type === 'plus') {
+      setYear(year + 1);
+    }
+  };
+
+  const acceptSelectYear = () => {
+    setSelectedYear({ year });
+    setYear(selectedYear);
+    setModalYear(false);
+  };
+
   return (
     <PageTemplate>
       <StyledWrapper>
         <StyledTop>
           <StyledHeader>
-            <div>April 2020</div>
+            <div>
+              {monthName} {selectedYear}
+            </div>
             <div>List of expenses</div>
           </StyledHeader>
           <StyledDates>
-            <div>2020</div>
+            <StyledYearBtn onClick={() => setModalYear(true)}>{selectedYear}</StyledYearBtn>
             {[...Array(12).keys()].map((m, i) => (
-              <DateIcon key={i} isCompleted={i < 4} isActive={i === 4}>
+              <DateIcon
+                key={i}
+                isCompleted={monthsStatus.find((x) => x.month === i + 1)}
+                isActive={i + 1 === selectedMonth}
+                onClick={() => selectMonth({ month: i + 1 })}
+              >
                 {i + 1}
               </DateIcon>
             ))}
@@ -300,6 +270,27 @@ const CallendarPage = () => {
         </StyledTop>
         <StyledContent>
           <PaymentCard />
+          {modalYear && (
+            <Modal
+              title="Select year"
+              closeModalFn={setModalYear}
+              btn={
+                <Button isActive onClick={() => acceptSelectYear()}>
+                  Accept
+                </Button>
+              }
+            >
+              <StyledSelectedYear>
+                <StyledArrow onClick={() => handleSelectYear('minus')}>
+                  <FontAwesomeIcon icon={faAngleLeft} />
+                </StyledArrow>
+                {year}
+                <StyledArrow onClick={() => handleSelectYear('plus')}>
+                  <FontAwesomeIcon icon={faAngleRight} />
+                </StyledArrow>
+              </StyledSelectedYear>
+            </Modal>
+          )}
         </StyledContent>
       </StyledWrapper>
     </PageTemplate>
