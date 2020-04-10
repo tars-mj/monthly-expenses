@@ -104,7 +104,7 @@ const PageTemplate = ({ children }) => (
         </ButtonMenu>
       </WrapperButton>
       <WrapperButton area="logout">
-        <ButtonMenu as={NavLink} to={routes.settings} activeClassName="activeBtn">
+        <ButtonMenu as={NavLink} to={routes.home} activeClassName="activeBtn">
           <FontAwesomeIcon color={theme.lightBlue} icon={faSignOutAlt} />
         </ButtonMenu>
       </WrapperButton>

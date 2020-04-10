@@ -14,31 +14,56 @@ const getCurrentTime = () => {
 const currentDate = getCurrentTime();
 
 // Initial state
-const initialState = () => {
-  return {
-    isLoading: false,
-    selectedYear: JSON.parse(window.localStorage.getItem('selectedYear')) || currentDate.year,
-    selectedMonth: JSON.parse(window.localStorage.getItem('selectedMonth')) || currentDate.month,
-    expenses: JSON.parse(window.localStorage.getItem('expenses')) || [],
-    categories: JSON.parse(window.localStorage.getItem('categories')) || [],
-  };
-};
+// const initialState = () => {
+//   return {
+//     isLoading: false,
+//     selectedYear: JSON.parse(window.localStorage.getItem('selectedYear')) || currentDate.year,
+//     selectedMonth: JSON.parse(window.localStorage.getItem('selectedMonth')) || currentDate.month,
+//     expenses: JSON.parse(window.localStorage.getItem('expenses')) || [],
+//     categories: JSON.parse(window.localStorage.getItem('categories')) || [],
+//   };
+// };
 
-const exampleData = {
+const initialState = {
   isLoading: false,
   selectedYear: 2020,
   selectedMonth: 4,
   expenses: [
     {
-      id: 662122,
+      id: 6621232,
       name: 'Rata kredytu za mieszkanie',
       typePayment: 'manual',
       category: { id: 324234324, name: 'czynsz' },
-      deadline: 14,
+      deadline: 12,
       year: [2020],
       month: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-      history: [{ year: 2020, month: 2, status: 'paid', amount: 1100 }],
+      history: [{ year: 2020, month: 4, status: 'completed', amount: 1100 }],
       amountExpected: 1200,
+      status: 'open',
+    },
+    {
+      id: 662233122,
+      name: 'Leasing',
+      typePayment: 'manual',
+      category: { id: 324234324, name: 'czynsz' },
+      deadline: 12,
+      year: [2020],
+      month: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+      history: [{ year: 2020, month: 2, status: 'completed', amount: 1100 }],
+      amountExpected: 1200,
+      status: 'open',
+    },
+    {
+      id: 662122,
+      name: 'Opłata za szkołę',
+      typePayment: 'auto',
+      category: { id: 324234324, name: 'czynsz' },
+      deadline: 19,
+      year: [2020],
+      month: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+      complitedStatusPerMonth: [1, 2, 3, 4],
+      history: [{ year: 2020, month: 2, status: 'completed', amount: 80 }],
+      amountExpected: 80,
       status: 'open',
     },
   ],
@@ -65,18 +90,18 @@ const reducer = (state, action) => {
 };
 
 const DataProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, initialState());
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   // Actions
   const setLoading = ({ isLoading }) => dispatch({ type: SET_LOADING, payload: { isLoading } });
 
   useEffect(() => {
-    if (typeof window.localStorage !== 'undefined') {
-      window.localStorage.setItem('selectedYear', JSON.stringify(state.selectedYear));
-      window.localStorage.setItem('selectedMonth', JSON.stringify(state.selectedMonth));
-      window.localStorage.setItem('expenses', JSON.stringify(state.expenses));
-      window.localStorage.setItem('categories', JSON.stringify(state.categories));
-    }
+    // if (typeof window.localStorage !== 'undefined') {
+    //   window.localStorage.setItem('selectedYear', JSON.stringify(state.selectedYear));
+    //   window.localStorage.setItem('selectedMonth', JSON.stringify(state.selectedMonth));
+    //   window.localStorage.setItem('expenses', JSON.stringify(state.expenses));
+    //   window.localStorage.setItem('categories', JSON.stringify(state.categories));
+    // }
   }, [state.selectedYear, state.selectedMonth, state.expenses, state.categories]);
 
   return (
