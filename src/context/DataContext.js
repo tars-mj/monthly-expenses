@@ -38,7 +38,7 @@ const initialState = {
       id: 6621232,
       name: 'Rata kredytu za mieszkanie',
       typePayment: 'manual',
-      category: { id: 324234324, name: 'czynsz' },
+      category: { id: 2321, label: 'czynsz', value: 'czynsz' },
       deadline: 12,
       year: [2020],
       month: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
@@ -50,7 +50,7 @@ const initialState = {
       id: 662233122,
       name: 'Leasing',
       typePayment: 'manual',
-      category: { id: 324234324, name: 'czynsz' },
+      category: { id: 2321, label: 'czynsz', value: 'czynsz' },
       deadline: 12,
       year: [2020],
       month: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
@@ -62,7 +62,7 @@ const initialState = {
       id: 662122,
       name: 'Opłata za szkołę',
       typePayment: 'auto',
-      category: { id: 324234324, name: 'czynsz' },
+      category: { id: 2321, label: 'czynsz', value: 'czynsz' },
       deadline: 12,
       year: [2020],
       month: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
@@ -72,10 +72,10 @@ const initialState = {
     },
   ],
   categories: [
-    { id: 2321, name: 'czynsz' },
-    { id: 23331, name: 'hobby' },
-    { id: 3321, name: 'kredyty' },
-    { id: 1233, name: 'multimedia' },
+    { id: 2321, label: 'czynsz', value: 'czynsz' },
+    { id: 23331, label: 'hobby', value: 'hobby' },
+    { id: 3321, label: 'kredyty', value: 'kredyty' },
+    { id: 1233, label: 'multimedia', value: 'multimedia' },
   ],
 };
 
@@ -85,6 +85,9 @@ const ADD_CLOSE_MONTH = 'ADD_CLOSE_MONTH';
 const SELECT_MONTH = 'SELECT_MONTH';
 const ACCEPT_PAYMENT = 'ACCEPT_PAYMENT';
 const SET_SELECTED_YEAR = 'SET_SELECTED_YEAR';
+const REMOVE_PAYMENT = 'REMOVE_PAYMENT';
+const ADD_PAYMENT = 'ADD_PAYMENT';
+const UPDATE_PAYMENT = 'UPDATE_PAYMENT';
 
 // Reducer
 const reducer = (state, action) => {
@@ -116,6 +119,16 @@ const reducer = (state, action) => {
       };
     case SET_SELECTED_YEAR:
       return { ...state, selectedYear: action.payload.year };
+
+    case REMOVE_PAYMENT:
+      return { ...state, expenses: [...state.expenses.filter((x) => x.id !== action.payload.id)] };
+    case ADD_PAYMENT:
+      return { ...state, expenses: [...state.expenses, action.payload] };
+    case UPDATE_PAYMENT:
+      return {
+        ...state,
+        expenses: [...state.expenses.filter((x) => x.id !== action.payload.id), action.payload],
+      };
     default:
       throw new Error();
   }
@@ -168,6 +181,73 @@ const DataProvider = ({ children }) => {
     });
   };
 
+  const removePayment = ({ id }) => {
+    dispatch({
+      type: REMOVE_PAYMENT,
+      payload: {
+        id,
+      },
+    });
+  };
+
+  const addPayment = ({
+    id,
+    name,
+    typePayment,
+    category,
+    deadline,
+    year,
+    month,
+    history = [],
+    amountExpected,
+    status = 'open',
+  }) => {
+    dispatch({
+      type: ADD_PAYMENT,
+      payload: {
+        id,
+        name,
+        typePayment,
+        category,
+        deadline,
+        year,
+        month,
+        history,
+        amountExpected,
+        status,
+      },
+    });
+  };
+
+  const updatePayment = ({
+    id,
+    name,
+    typePayment,
+    category,
+    deadline,
+    year,
+    month,
+    history,
+    amountExpected,
+    status,
+  }) => {
+    dispatch({
+      type: UPDATE_PAYMENT,
+      payload: {
+        id,
+        name,
+        typePayment,
+        category,
+        deadline,
+        year,
+        month,
+        history,
+        amountExpected,
+        status,
+      },
+    });
+  };
+
   useEffect(() => {
     // if (typeof window.localStorage !== 'undefined') {
     //   window.localStorage.setItem('selectedYear', JSON.stringify(state.selectedYear));
@@ -189,6 +269,9 @@ const DataProvider = ({ children }) => {
         selectMonth,
         acceptPayment,
         setSelectedYear,
+        removePayment,
+        addPayment,
+        updatePayment,
       }}
     >
       {children}

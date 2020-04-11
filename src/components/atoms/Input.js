@@ -6,7 +6,7 @@ const Input = styled.input.attrs((props) => ({
   autoComplete: 'off',
 }))`
   font-size: ${({ theme }) => theme.fontSize.s};
-  color: ${({ theme }) => theme.black};
+  color: ${({ theme }) => theme.blue};
   width: ${({ width }) => width || '100%'};
   height: ${({ height }) => height || '55px'};
   border: 0px solid ${({ theme, isError }) => (isError ? theme.red : theme.blue)};

@@ -7,98 +7,20 @@ import Button from '../components/atoms/Button';
 import Modal from '../components/atoms/Modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
-
-const months = [
-  {
-    month: 1,
-    name: 'January',
-  },
-  {
-    month: 2,
-    name: 'February',
-  },
-  {
-    month: 3,
-    name: 'March',
-  },
-  {
-    month: 4,
-    name: 'April',
-  },
-  {
-    month: 5,
-    name: 'May',
-  },
-  {
-    month: 6,
-    name: 'June',
-  },
-  {
-    month: 7,
-    name: 'July',
-  },
-  {
-    month: 8,
-    name: 'August',
-  },
-  {
-    month: 9,
-    name: 'September',
-  },
-  {
-    month: 10,
-    name: 'October',
-  },
-  {
-    month: 11,
-    name: 'November',
-  },
-  {
-    month: 12,
-    name: 'December',
-  },
-];
-
-const StyledWrapper = styled.div`
-  height: 100vh;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  grid-template-rows: 100px minmax(0, 1fr);
-  grid-template-areas:
-    'top'
-    'bottom';
-`;
-
-const StyledTop = styled.div`
-  grid-area: top;
-  background-color: ${({ theme }) => theme.white};
-  box-shadow: 0 0px 15px -5px hsla(0, 0%, 0%, 0.1);
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  grid-template-rows: minmax(0, 1fr);
-  align-items: center;
-  padding: 0 20px;
-`;
-
-const StyledHeader = styled.div`
-  color: ${({ theme }) => theme.blue};
-
-  div:first-child {
-    font-weight: ${({ theme }) => theme.fontLight};
-    font-size: ${({ theme }) => theme.fontSize.s};
-  }
-  div:last-child {
-    font-weight: ${({ theme }) => theme.fontBold};
-    font-size: ${({ theme }) => theme.fontSize.l};
-  }
-`;
+import { months } from '../utils/months';
+import {
+  StyledWrapperPage,
+  StyledTop,
+  StyledHeader,
+  StyledContent,
+} from '../components/moleculs/StyledPageElements';
 
 const DateIcon = styled.li`
   font-weight: ${({ theme }) => theme.fontBold};
   font-size: ${({ theme }) => theme.fontSize.xs};
   color: ${({ theme }) => theme.gray};
-  width: 25px;
-  height: 25px;
+  width: 2.5rem;
+  height: 2.5rem;
   border-radius: 50%;
   border: 2px solid ${({ theme }) => theme.gray};
   display: flex;
@@ -141,17 +63,7 @@ const StyledDates = styled.ul`
   color: ${({ theme }) => theme.blue};
   font-weight: ${({ theme }) => theme.fontLight};
   font-size: ${({ theme }) => theme.fontSize.s};
-  grid-gap: 8px;
-`;
-
-const StyledContent = styled.div`
-  grid-area: bottom;
-  height: 100%;
-  overflow-y: scroll;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 4rem;
+  grid-gap: 0.8rem;
 `;
 
 const StyledYearBtn = styled.div`
@@ -171,7 +83,7 @@ const StyledSelectedYear = styled.div`
   width: 30rem;
   height: 8rem;
   display: grid;
-  grid-template-columns: 1fr 200px 1fr;
+  grid-template-columns: 1fr 20rem 1fr;
   grid-template-rows: 1fr;
   color: ${({ theme }) => theme.blue};
   justify-items: center;
@@ -226,7 +138,7 @@ const CallendarPage = () => {
   };
 
   const findMonthName = () => {
-    setMonthName(months.find((x) => x.month === selectedMonth).name);
+    setMonthName(months.find((x) => x.value === selectedMonth).label);
   };
 
   const handleSelectYear = (type) => {
@@ -246,7 +158,7 @@ const CallendarPage = () => {
 
   return (
     <PageTemplate>
-      <StyledWrapper>
+      <StyledWrapperPage>
         <StyledTop>
           <StyledHeader>
             <div>
@@ -292,7 +204,7 @@ const CallendarPage = () => {
             </Modal>
           )}
         </StyledContent>
-      </StyledWrapper>
+      </StyledWrapperPage>
     </PageTemplate>
   );
 };

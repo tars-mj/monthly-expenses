@@ -9,6 +9,7 @@ const Button = styled.button`
   cursor: ${({ isActive }) => (isActive ? 'cursor' : 'default')};
   border: 0;
   height: 5rem;
+  width: ${({ width }) => (width ? width : 'auto')};
   font-weight: ${({ theme }) => theme.fontBold};
   font-size: ${({ theme }) => theme.fontSize.s};
   padding: 1rem 3rem;

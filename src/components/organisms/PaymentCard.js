@@ -7,10 +7,11 @@ import { DataContext } from '../../context/DataContext';
 import Button from '../atoms/Button';
 import Modal from '../atoms/Modal';
 import Input from '../atoms/Input';
+import BtnSmall from '../atoms/BtnSmall';
 
 const StyledCard = styled.section`
   width: 100%;
-  max-width: 1200px;
+  max-width: 120rem;
   background-color: ${({ theme }) => theme.white};
   border-radius: 5px;
   box-shadow: 0 10px 15px -15px hsla(0, 0%, 0%, 0.4);
@@ -88,34 +89,13 @@ const StyledAmount = styled.li`
   align-items: center;
 `;
 
-const BtnSmall = styled.button`
-  width: 2.2rem;
-  height: 2.2rem;
-  background-color: ${({ type, theme, isActive }) =>
-    !isActive ? theme.gray : type === 'edit' ? theme.red : theme.aquamarine};
-  border: 0;
-  border-radius: 4px;
-  color: ${({ theme }) => theme.white};
-  font-size: ${({ theme }) => theme.fontSize.xss};
-
-  cursor: ${({ isActive }) => (isActive ? 'cursor' : 'default')};
-  &:focus {
-    outline: none;
-  }
-  transition: transform 0.25s ease-out;
-
-  &:hover {
-    transform: scale(1.2);
-  }
-`;
-
 const StyledInfo = styled.span`
   font-weight: ${({ theme }) => theme.fontLight};
   color: ${({ theme }) => theme.blue};
   font-size: ${({ theme }) => theme.fontSize.s};
 `;
 
-const PaymentCard = () => {
+const PaymentCard = ({ isSettingsPage }) => {
   const {
     selectedYear,
     selectedMonth,
@@ -234,8 +214,8 @@ const PaymentCard = () => {
       <StyledCard>
         <StyledCardRow>
           <li>Payment name</li>
-          <li>Type</li>
           <li>Amount</li>
+          <li>Type</li>
           <li>Date</li>
           <li>Status</li>
         </StyledCardRow>
