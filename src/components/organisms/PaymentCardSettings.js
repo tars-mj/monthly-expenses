@@ -38,7 +38,7 @@ const StyledCard = styled.section`
 
 const StyledCardRow = styled.ul`
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 160px repeat(2, 100px) 80px;
+  grid-template-columns: minmax(0, 1fr) repeat(4, 100px) 80px;
   grid-auto-rows: 40px;
   align-items: center;
   list-style-type: none;
@@ -100,31 +100,39 @@ const PaymentCardSettings = () => {
       <StyledCard>
         <StyledCardRow>
           <li>Payment name</li>
+          <li>Category</li>
           <li>Amount</li>
           <li>Type</li>
           <li>Date</li>
           <li>Action</li>
         </StyledCardRow>
         {filteredData &&
-          filteredData.map(({ id, name, typePayment, amountExpected, deadline, history }) => {
-            return (
-              <StyledCardRow key={id}>
-                <li>{name}</li>
-
-                <StyledAmount>{amountExpected}</StyledAmount>
-                <li>{typePayment}</li>
-                <li>{`${deadline}-${selectedMonth}-${selectedYear}`}</li>
-                <li>
-                  <BtnSmall isActive onClick={() => handleEditModalOpen(id)}>
-                    <FontAwesomeIcon icon={faEdit} />
-                  </BtnSmall>
-                  <BtnSmall isMargin isActive type="edit" onClick={() => handleRemoveModalOpen(id)}>
-                    <FontAwesomeIcon icon={faTimes} />
-                  </BtnSmall>
-                </li>
-              </StyledCardRow>
-            );
-          })}
+          filteredData.map(
+            ({ id, name, typePayment, amountExpected, deadline, history, category }) => {
+              return (
+                <StyledCardRow key={id}>
+                  <li>{name}</li>
+                  <li>{category.label}</li>
+                  <StyledAmount>{amountExpected}</StyledAmount>
+                  <li>{typePayment}</li>
+                  <li>{`${deadline}-${selectedMonth}-${selectedYear}`}</li>
+                  <li>
+                    <BtnSmall isActive onClick={() => handleEditModalOpen(id)}>
+                      <FontAwesomeIcon icon={faEdit} />
+                    </BtnSmall>
+                    <BtnSmall
+                      isMargin
+                      isActive
+                      type="edit"
+                      onClick={() => handleRemoveModalOpen(id)}
+                    >
+                      <FontAwesomeIcon icon={faTimes} />
+                    </BtnSmall>
+                  </li>
+                </StyledCardRow>
+              );
+            },
+          )}
       </StyledCard>
       {removeModal && (
         <Modal

@@ -18,7 +18,15 @@ const StyledBoardLayout = styled.div`
   grid-template-columns: 100px auto;
   grid-template-rows: minmax(0, 1fr);
   grid-template-areas: 'menu main';
-  background-color: ${({ theme }) => theme.brown1};
+  background-color: ${({ theme }) => theme.gray};
+
+  @media (max-width: 768px) {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr) 100px;
+    grid-template-areas:
+      'main'
+      'menu';
+  }
 `;
 
 const StyledMenu = styled.div`
@@ -34,6 +42,12 @@ const StyledMenu = styled.div`
     'settings'
     '.'
     'logout';
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: minmax(0, 1fr);
+    grid-template-areas: 'logo callendar statistics settings logout';
+  }
 `;
 
 const WrapperButton = styled.div`

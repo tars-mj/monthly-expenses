@@ -1,5 +1,5 @@
 import React, { createContext, useReducer, useEffect } from 'react';
-
+import { sampleData as initialState } from '../utils/sampleData';
 export const DataContext = createContext();
 
 const getCurrentTime = () => {
@@ -21,63 +21,9 @@ const currentDate = getCurrentTime();
 //     selectedMonth: JSON.parse(window.localStorage.getItem('selectedMonth')) || currentDate.month,
 //     expenses: JSON.parse(window.localStorage.getItem('expenses')) || [],
 //     categories: JSON.parse(window.localStorage.getItem('categories')) || [],
+//     monthsClosed: JSON.parse(window.localStorage.getItem('monthsClosed')) || [],
 //   };
 // };
-
-const initialState = {
-  isLoading: false,
-  selectedYear: 2020,
-  selectedMonth: 4,
-  monthsClosed: [
-    { year: 2020, month: 1 },
-    { year: 2020, month: 2 },
-    { year: 2020, month: 3 },
-  ],
-  expenses: [
-    {
-      id: 6621232,
-      name: 'Rata kredytu za mieszkanie',
-      typePayment: 'manual',
-      category: { id: 2321, label: 'czynsz', value: 'czynsz' },
-      deadline: 12,
-      year: [2020],
-      month: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-      history: [{ year: 2020, month: 4, status: 'completed', amount: 1100 }],
-      amountExpected: 1200,
-      status: 'open',
-    },
-    {
-      id: 662233122,
-      name: 'Leasing',
-      typePayment: 'manual',
-      category: { id: 2321, label: 'czynsz', value: 'czynsz' },
-      deadline: 12,
-      year: [2020],
-      month: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-      history: [],
-      amountExpected: 1200,
-      status: 'open',
-    },
-    {
-      id: 662122,
-      name: 'Opłata za szkołę',
-      typePayment: 'auto',
-      category: { id: 2321, label: 'czynsz', value: 'czynsz' },
-      deadline: 12,
-      year: [2020],
-      month: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-      history: [],
-      amountExpected: 80,
-      status: 'open',
-    },
-  ],
-  categories: [
-    { id: 2321, label: 'czynsz', value: 'czynsz' },
-    { id: 23331, label: 'hobby', value: 'hobby' },
-    { id: 3321, label: 'kredyty', value: 'kredyty' },
-    { id: 1233, label: 'multimedia', value: 'multimedia' },
-  ],
-};
 
 // Constants
 const SET_LOADING = 'SET_LOADING';
@@ -312,14 +258,21 @@ const DataProvider = ({ children }) => {
     });
   };
 
-  useEffect(() => {
-    // if (typeof window.localStorage !== 'undefined') {
-    //   window.localStorage.setItem('selectedYear', JSON.stringify(state.selectedYear));
-    //   window.localStorage.setItem('selectedMonth', JSON.stringify(state.selectedMonth));
-    //   window.localStorage.setItem('expenses', JSON.stringify(state.expenses));
-    //   window.localStorage.setItem('categories', JSON.stringify(state.categories));
-    // }
-  }, [state.selectedYear, state.selectedMonth, state.expenses, state.categories]);
+  // useEffect(() => {
+  //   if (typeof window.localStorage !== 'undefined') {
+  //     window.localStorage.setItem('selectedYear', JSON.stringify(state.selectedYear));
+  //     window.localStorage.setItem('selectedMonth', JSON.stringify(state.selectedMonth));
+  //     window.localStorage.setItem('expenses', JSON.stringify(state.expenses));
+  //     window.localStorage.setItem('categories', JSON.stringify(state.categories));
+  //     window.localStorage.setItem('monthsClosed', JSON.stringify(state.monthsClosed));
+  //   }
+  // }, [
+  //   state.selectedYear,
+  //   state.selectedMonth,
+  //   state.expenses,
+  //   state.categories,
+  //   state.monthsClosed,
+  // ]);
 
   return (
     <DataContext.Provider
