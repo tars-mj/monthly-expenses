@@ -75,8 +75,10 @@ const PaymentForm = ({ id, onCloseModal }) => {
 
       addPayment({
         ...values,
-        year: yearsState,
-        month: monthsState,
+        category: categoryState,
+        typePayment: typeState.value,
+        month: monthsState.flatMap((x) => x.value),
+        year: yearsState.flatMap((x) => x.value),
         id,
       });
 
@@ -124,7 +126,7 @@ const PaymentForm = ({ id, onCloseModal }) => {
         title="Category"
         placeholder="Category"
         name="category"
-        value={productToEdit ? categoryState : null}
+        value={productToEdit && categoryState}
         onChange={(c) => setCategoryState(c)}
         options={categories}
         components={animatedComponents}
@@ -134,7 +136,7 @@ const PaymentForm = ({ id, onCloseModal }) => {
         title="Type payment"
         placeholder="Type payment"
         name="typePayment"
-        value={productToEdit ? typeState : null}
+        value={productToEdit && typeState}
         onChange={(t) => setTypeState(t)}
         options={typePaymentInit}
         components={animatedComponents}
@@ -144,7 +146,7 @@ const PaymentForm = ({ id, onCloseModal }) => {
         title="Months, where in payment must be included"
         placeholder="Months, where in payment must be included"
         name="month"
-        value={productToEdit ? monthsState : null}
+        value={monthsState}
         onChange={(m) => (m ? setMonthsState(m) : [])}
         options={months}
         isMulti
@@ -157,7 +159,7 @@ const PaymentForm = ({ id, onCloseModal }) => {
         name="year"
         onChange={(y) => (y ? setYearsState(y) : [])}
         options={years}
-        value={productToEdit ? yearsState : null}
+        value={yearsState}
         isMulti
         components={animatedComponents}
       />

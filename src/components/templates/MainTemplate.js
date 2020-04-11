@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ThemeProvider } from 'styled-components';
-import GlobalStyles from '../theme/GlobalStyles';
-import { theme } from '../theme/theme';
+import GlobalStyles from '../../theme/GlobalStyles';
+import { theme } from '../../theme/theme';
 import { Helmet } from 'react-helmet';
 
 const MainTemplate = ({ children }) => (

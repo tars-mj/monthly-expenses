@@ -5,8 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDollarSign, faChartArea, faSignOutAlt, faCogs } from '@fortawesome/free-solid-svg-icons';
 import { faCalendarAlt } from '@fortawesome/free-regular-svg-icons';
 import { NavLink } from 'react-router-dom';
-import { theme } from '../theme/theme';
-import { routes } from '../routes';
+import { theme } from '../../theme/theme';
+import { routes } from '../../routes';
 
 const StyledBoardLayout = styled.div`
   margin: 0;

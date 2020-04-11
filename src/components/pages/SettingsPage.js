@@ -5,16 +5,16 @@ import {
   StyledTop,
   StyledHeader,
   StyledContent,
-} from '../components/moleculs/StyledPageElements';
+} from '../moleculs/StyledPageElements';
 import styled, { css } from 'styled-components';
-import Modal from '../components/atoms/Modal';
-import Button from '../components/atoms/Button';
-import { DataContext } from '../context/DataContext';
-import PaymentCardSettings from '../components/organisms/PaymentCardSettings';
-import PaymentForm from '../components/organisms/PaymentForm';
+import Modal from '../atoms/Modal';
+import Button from '../atoms/Button';
+import { DataContext } from '../../context/DataContext';
+import PaymentCardSettings from '../organisms/PaymentCardSettings';
+import PaymentForm from '../organisms/PaymentForm';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import CategoryForm from '../components/organisms/CategoryForm';
+import CategoryForm from '../organisms/CategoryForm';
 
 const StyledSection = styled.section`
   width: 100%;

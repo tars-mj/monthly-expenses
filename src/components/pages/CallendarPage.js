@@ -1,19 +1,19 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { DataContext } from '../context/DataContext';
+import { DataContext } from '../../context/DataContext';
 import PageTemplate from '../templates/PageTemplate';
 import styled, { css } from 'styled-components';
-import PaymentCard from '../components/organisms/PaymentCard';
-import Button from '../components/atoms/Button';
-import Modal from '../components/atoms/Modal';
+import PaymentCard from '../organisms/PaymentCard';
+import Button from '../atoms/Button';
+import Modal from '../atoms/Modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
-import { months } from '../utils/months';
+import { months } from '../../utils/months';
 import {
   StyledWrapperPage,
   StyledTop,
   StyledHeader,
   StyledContent,
-} from '../components/moleculs/StyledPageElements';
+} from '../moleculs/StyledPageElements';
 
 const DateIcon = styled.li`
   font-weight: ${({ theme }) => theme.fontBold};

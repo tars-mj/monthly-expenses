@@ -3,9 +3,9 @@ import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import CallendarPage from './CallendarPage';
 import SettingsPage from './SettingsPage';
 import StatisticsPage from './StatisticsPage';
-import { routes } from '../routes';
+import { routes } from '../../routes';
 import MainTemplate from '../templates/MainTemplate';
-import DataProvider from '../context/DataContext';
+import DataProvider from '../../context/DataContext';
 
 const Root = () => (
   <DataProvider>

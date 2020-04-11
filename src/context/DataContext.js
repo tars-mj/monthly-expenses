@@ -151,6 +151,15 @@ const reducer = (state, action) => {
     case REMOVE_CATEGORY:
       return {
         ...state,
+        expenses: [
+          ...state.expenses.map((x) => {
+            if (x.category.id === action.payload.id) {
+              x.category = { id: 0, value: 'no category', label: 'no category' };
+              return x;
+            }
+            return x;
+          }),
+        ],
         categories: [...state.categories.filter((x) => x.id !== action.payload.id)],
       };
     default:
