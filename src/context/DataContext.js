@@ -88,6 +88,9 @@ const SET_SELECTED_YEAR = 'SET_SELECTED_YEAR';
 const REMOVE_PAYMENT = 'REMOVE_PAYMENT';
 const ADD_PAYMENT = 'ADD_PAYMENT';
 const UPDATE_PAYMENT = 'UPDATE_PAYMENT';
+const ADD_CATEGORY = 'ADD_CATEGORY';
+const EDIT_CATEGORY = 'EDIT_CATEGORY';
+const REMOVE_CATEGORY = 'REMOVE_CATEGORY';
 
 // Reducer
 const reducer = (state, action) => {
@@ -99,7 +102,6 @@ const reducer = (state, action) => {
     case SELECT_MONTH:
       return { ...state, selectedMonth: action.payload.month };
     case ACCEPT_PAYMENT:
-      console.log(action.payload);
       return {
         ...state,
         expenses: [
@@ -128,6 +130,28 @@ const reducer = (state, action) => {
       return {
         ...state,
         expenses: [...state.expenses.filter((x) => x.id !== action.payload.id), action.payload],
+      };
+    case ADD_CATEGORY:
+      return { ...state, categories: [...state.categories, action.payload] };
+    case EDIT_CATEGORY:
+      return {
+        ...state,
+        expenses: [
+          ...state.expenses.map((x) => {
+            if (x.category.id === action.payload.id) {
+              x.category.label = action.payload.label;
+              x.category.value = action.payload.value;
+              return x;
+            }
+            return x;
+          }),
+        ],
+        categories: [...state.categories.filter((x) => x.id !== action.payload.id), action.payload],
+      };
+    case REMOVE_CATEGORY:
+      return {
+        ...state,
+        categories: [...state.categories.filter((x) => x.id !== action.payload.id)],
       };
     default:
       throw new Error();
@@ -248,6 +272,37 @@ const DataProvider = ({ children }) => {
     });
   };
 
+  const addCategory = ({ id, label, value }) => {
+    dispatch({
+      type: ADD_CATEGORY,
+      payload: {
+        id,
+        label,
+        value,
+      },
+    });
+  };
+
+  const updateCategory = ({ id, label, value }) => {
+    dispatch({
+      type: EDIT_CATEGORY,
+      payload: {
+        id,
+        label,
+        value,
+      },
+    });
+  };
+
+  const removeCategory = ({ id }) => {
+    dispatch({
+      type: REMOVE_CATEGORY,
+      payload: {
+        id,
+      },
+    });
+  };
+
   useEffect(() => {
     // if (typeof window.localStorage !== 'undefined') {
     //   window.localStorage.setItem('selectedYear', JSON.stringify(state.selectedYear));
@@ -272,6 +327,9 @@ const DataProvider = ({ children }) => {
         removePayment,
         addPayment,
         updatePayment,
+        addCategory,
+        updateCategory,
+        removeCategory,
       }}
     >
       {children}

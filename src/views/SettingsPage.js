@@ -12,6 +12,9 @@ import Button from '../components/atoms/Button';
 import { DataContext } from '../context/DataContext';
 import PaymentCardSettings from '../components/organisms/PaymentCardSettings';
 import PaymentForm from '../components/organisms/PaymentForm';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import CategoryForm from '../components/organisms/CategoryForm';
 
 const StyledSection = styled.section`
   width: 100%;
@@ -55,14 +58,39 @@ const CategoryTag = styled.span`
   font-weight: ${({ theme }) => theme.fontThin};
   color: ${({ theme }) => theme.green};
   margin: 4px;
+  position: relative;
+  cursor: pointer;
+`;
+
+const AddCategory = styled.button`
+  border: 0;
+  background-color: ${({ theme }) => theme.green};
+  color: ${({ theme }) => theme.white};
+  width: 2.9rem;
+  height: 2.9rem;
+  border-radius: 4px;
+  margin: 4px;
+
+  &:focus {
+    outline: none;
+  }
+  transition: transform 0.25s ease-out;
+
+  &:hover {
+    transform: scale(1.2);
+  }
 `;
 
 const SettingsPage = () => {
   const [paymentModal, setPaymentModal] = useState(false);
+  const [categoryModal, setCategoryModal] = useState(false);
+  const [editCategoryModal, setEditCategoryModal] = useState(false);
+  const [id, setId] = useState();
   const { categories } = useContext(DataContext);
 
-  const handleAddPayment = () => {
-    setPaymentModal(false);
+  const handleEditModalOpen = (id) => {
+    setId(id);
+    setEditCategoryModal(true);
   };
 
   return (
@@ -82,7 +110,14 @@ const SettingsPage = () => {
             <StyledCategoryRow>Your categories</StyledCategoryRow>
             <StyledCategoryRow>
               {categories &&
-                categories.map((cat) => <CategoryTag key={cat.id}>{cat.label}</CategoryTag>)}
+                categories.map((cat) => (
+                  <CategoryTag onClick={() => handleEditModalOpen(cat.id)} key={cat.id}>
+                    {cat.label}
+                  </CategoryTag>
+                ))}
+              <AddCategory onClick={() => setCategoryModal(true)}>
+                <FontAwesomeIcon icon={faPlus} />
+              </AddCategory>
             </StyledCategoryRow>
           </StyledSection>
 
@@ -92,6 +127,16 @@ const SettingsPage = () => {
       {paymentModal && (
         <Modal title="Add new payment" closeModalFn={setPaymentModal}>
           <PaymentForm onCloseModal={setPaymentModal}></PaymentForm>
+        </Modal>
+      )}
+      {categoryModal && (
+        <Modal title="Add new category" closeModalFn={setCategoryModal}>
+          <CategoryForm onCloseModal={setCategoryModal} />
+        </Modal>
+      )}
+      {editCategoryModal && (
+        <Modal title="Edit category" closeModalFn={setEditCategoryModal}>
+          <CategoryForm id={id} onCloseModal={setEditCategoryModal} />
         </Modal>
       )}
     </PageTemplate>

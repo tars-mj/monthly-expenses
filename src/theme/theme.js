@@ -8,6 +8,7 @@ export const theme = {
   white: '#FDFDFD',
   gray: '#EDEDED',
   red: '#FF2E2E',
+  redHover: '#c81f1f',
   fontThin: 300,
   fontLight: 400,
   fontRegular: 500,

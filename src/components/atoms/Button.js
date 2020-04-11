@@ -26,6 +26,14 @@ const Button = styled.button`
         background-color: ${({ theme }) => theme.green};
       }
     `};
+  ${({ warning }) =>
+    warning &&
+    css`
+      background-color: ${({ theme }) => theme.red};
+      &:hover {
+        background-color: ${({ theme }) => theme.redHover};
+      }
+    `};
 `;
 
 export default Button;

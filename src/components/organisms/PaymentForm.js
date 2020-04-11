@@ -68,8 +68,6 @@ const PaymentForm = ({ id, onCloseModal }) => {
         category: categoryState,
         typePayment: typeState.value,
       };
-      console.log('productToEdit', productToEdit);
-      console.log('editedProduct', editedProduct);
       updatePayment(editedProduct);
       onCloseModal();
     } else {
