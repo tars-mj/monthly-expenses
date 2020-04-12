@@ -6,10 +6,10 @@ const BtnSmall = styled.button`
   background-color: ${({ type, theme, isActive }) =>
     !isActive ? theme.gray : type === 'edit' ? theme.red : theme.aquamarine};
   border: 0;
-  border-radius: 4px;
+  border-radius: 0.4rem;
   color: ${({ theme }) => theme.white};
   font-size: ${({ theme }) => theme.fontSize.xss};
-  margin: ${({ isMargin }) => isMargin && '5px'};
+  margin: ${({ isMargin }) => isMargin && '0.5rem'};
   cursor: ${({ isActive }) => (isActive ? 'cursor' : 'default')};
   &:focus {
     outline: none;

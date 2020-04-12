@@ -9,7 +9,7 @@ export const sampleData = {
   ],
   expenses: [
     {
-      id: 6621232232,
+      id: 23441,
       name: 'Czynsz mieszkanie',
       typePayment: 'manual',
       category: { id: 2321, label: 'czynsz', value: 'czynsz' },
@@ -22,11 +22,11 @@ export const sampleData = {
         { year: 2020, month: 3, status: 'completed', amount: 600 },
         { year: 2020, month: 4, status: 'completed', amount: 600 },
       ],
-      amountExpected: 1200,
+      amountExpected: 600,
       status: 'open',
     },
     {
-      id: 66212322232,
+      id: 55421,
       name: 'Garaz',
       typePayment: 'manual',
       category: { id: 2321, label: 'czynsz', value: 'czynsz' },
@@ -38,11 +38,11 @@ export const sampleData = {
         { year: 2020, month: 2, status: 'completed', amount: 200 },
         { year: 2020, month: 3, status: 'completed', amount: 200 },
       ],
-      amountExpected: 1200,
+      amountExpected: 200,
       status: 'open',
     },
     {
-      id: 6621232,
+      id: 12367,
       name: 'Rata kredytu za mieszkanie',
       typePayment: 'manual',
       category: { id: 3321, label: 'kredyty', value: 'kredyty' },
@@ -58,7 +58,7 @@ export const sampleData = {
       status: 'open',
     },
     {
-      id: 662233122,
+      id: 62391,
       name: 'Leasing samochodu',
       typePayment: 'manual',
       category: { id: 3321, label: 'kredyty', value: 'kredyty' },
@@ -70,11 +70,11 @@ export const sampleData = {
         { year: 2020, month: 2, status: 'completed', amount: 800 },
         { year: 2020, month: 3, status: 'completed', amount: 800 },
       ],
-      amountExpected: 1200,
+      amountExpected: 900,
       status: 'open',
     },
     {
-      id: 32123,
+      id: 32134678,
       name: 'Netflix',
       typePayment: 'manual',
       category: { id: 23331, label: 'hobby', value: 'hobby' },
@@ -90,7 +90,7 @@ export const sampleData = {
       status: 'open',
     },
     {
-      id: 332114,
+      id: 2221145,
       name: 'Spotify',
       typePayment: 'manual',
       category: { id: 23331, label: 'hobby', value: 'hobby' },
@@ -107,7 +107,7 @@ export const sampleData = {
       status: 'open',
     },
     {
-      id: 662122,
+      id: 45321,
       name: 'Kurs angielskiego',
       typePayment: 'auto',
       category: { id: 12333, label: 'nauka', value: 'nauka' },
@@ -119,7 +119,7 @@ export const sampleData = {
       status: 'open',
     },
     {
-      id: 662122,
+      id: 32225678,
       name: 'Eduweb',
       typePayment: 'auto',
       category: { id: 12333, label: 'nauka', value: 'nauka' },

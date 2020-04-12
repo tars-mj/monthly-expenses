@@ -15,14 +15,14 @@ const StyledBoardLayout = styled.div`
   height: 100vh;
   display: grid;
 
-  grid-template-columns: 100px auto;
+  grid-template-columns: 10rem auto;
   grid-template-rows: minmax(0, 1fr);
   grid-template-areas: 'menu main';
   background-color: ${({ theme }) => theme.gray};
 
   @media (max-width: 768px) {
     grid-template-columns: minmax(0, 1fr);
-    grid-template-rows: minmax(0, 1fr) 100px;
+    grid-template-rows: minmax(0, 1fr) 10rem;
     grid-template-areas:
       'main'
       'menu';
@@ -34,7 +34,7 @@ const StyledMenu = styled.div`
   background-color: ${({ theme }) => theme.navyBlue};
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  grid-template-rows: 100px repeat(3, 80px) minmax(0, 1fr) 80px;
+  grid-template-rows: 10rem repeat(3, 8rem) minmax(0, 1fr) 8rem;
   grid-template-areas:
     'logo'
     'callendar'
@@ -80,8 +80,8 @@ const ButtonMenu = styled.div`
 
 const StyledMainLogo = styled.div`
   background-color: ${({ theme }) => theme.navyBlue};
-  width: 60px;
-  height: 60px;
+  width: 6rem;
+  height: 6rem;
   border: 4px solid ${({ theme }) => theme.lightBlue};
   border-radius: 50%;
   display: flex;
@@ -118,7 +118,7 @@ const PageTemplate = ({ children }) => (
         </ButtonMenu>
       </WrapperButton>
       <WrapperButton area="logout">
-        <ButtonMenu as={NavLink} to={routes.home} activeClassName="activeBtn">
+        <ButtonMenu as={NavLink} to={routes.home}>
           <FontAwesomeIcon color={theme.lightBlue} icon={faSignOutAlt} />
         </ButtonMenu>
       </WrapperButton>

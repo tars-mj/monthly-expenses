@@ -8,12 +8,12 @@ const Input = styled.input.attrs((props) => ({
   font-size: ${({ theme }) => theme.fontSize.s};
   color: ${({ theme }) => theme.blue};
   width: ${({ width }) => width || '100%'};
-  height: ${({ height }) => height || '55px'};
+  height: ${({ height }) => height || '5.5rem'};
   border: 0px solid ${({ theme, isError }) => (isError ? theme.red : theme.blue)};
 
   caret-color: ${({ theme }) => theme.blue};
-  padding-left: 10px;
-  margin-bottom: 5px;
+  padding-left: 1rem;
+  margin-bottom: 0.5rem;
   background-color: ${({ theme }) => theme.gray};
   justify-self: self-start;
 

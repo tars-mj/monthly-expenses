@@ -12,7 +12,7 @@ const StyledCard = styled.section`
   width: 100%;
   max-width: 120rem;
   background-color: ${({ theme }) => theme.white};
-  border-radius: 5px;
+  border-radius: 0.5rem;
   box-shadow: 0 10px 15px -15px hsla(0, 0%, 0%, 0.4);
 
   ul:first-child {
@@ -26,10 +26,10 @@ const StyledCard = styled.section`
   }
 
   div {
-    padding: 10px;
+    padding: 1rem;
     background-color: ${({ theme }) => theme.white};
     border-radius: 0 0 5px 5px;
-    height: 100px;
+    height: 10rem;
     display: flex;
     justify-content: center;
     align-items: flex-end;
@@ -38,16 +38,16 @@ const StyledCard = styled.section`
 
 const StyledCardRow = styled.ul`
   display: grid;
-  grid-template-columns: minmax(0, 1fr) repeat(4, 100px) 80px;
-  grid-auto-rows: 40px;
+  grid-template-columns: minmax(0, 1fr) repeat(4, 10rem) 8rem;
+  grid-auto-rows: 3rem;
   align-items: center;
   list-style-type: none;
-  padding: 10px;
+  padding: 1rem;
   border-top: 1px solid ${({ theme }) => theme.gray};
   transition: background-color 0.15s ease-out;
   color: ${({ theme }) => theme.blue};
   font-weight: ${({ theme }) => theme.fontLight};
-  font-size: ${({ theme }) => theme.fontSize.s};
+  font-size: ${({ theme }) => theme.fontSize.xs};
   &:hover {
     background-color: ${({ theme }) => theme.gray};
   }
@@ -60,7 +60,7 @@ const StyledCardRow = styled.ul`
 const StyledAmount = styled.li`
   display: grid;
   grid-template-columns: 0.25fr 0.25fr 2fr;
-  grid-gap: 5px;
+  grid-gap: 0.5rem;
   align-items: center;
 `;
 
@@ -76,6 +76,7 @@ const PaymentCardSettings = () => {
   }, [selectedYear, selectedMonth, expenses]);
 
   const selectData = () => {
+    console.log(expenses);
     setFilteredData(expenses);
   };
 
@@ -113,7 +114,7 @@ const PaymentCardSettings = () => {
                 <StyledCardRow key={id}>
                   <li>{name}</li>
                   <li>{category.label}</li>
-                  <StyledAmount>{amountExpected}</StyledAmount>
+                  <StyledAmount>{`${amountExpected}zł`}</StyledAmount>
                   <li>{typePayment}</li>
                   <li>{`${deadline}-${selectedMonth}-${selectedYear}`}</li>
                   <li>

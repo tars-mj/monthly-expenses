@@ -55,7 +55,7 @@ const DateIcon = styled.li`
 const StyledDates = styled.ul`
   justify-self: end;
   display: grid;
-  grid-template-columns: 50px repeat(12, auto);
+  grid-template-columns: 5rem repeat(12, auto);
   grid-template-rows: minmax(0, 1fr);
   list-style-type: none;
   justify-items: center;

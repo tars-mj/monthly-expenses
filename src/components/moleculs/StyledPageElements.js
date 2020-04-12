@@ -4,7 +4,7 @@ export const StyledWrapperPage = styled.div`
   height: 100vh;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  grid-template-rows: 10rem minmax(0, 1fr);
+  grid-template-rows: 8rem minmax(0, 1fr);
   grid-template-areas:
     'top'
     'bottom';
@@ -18,7 +18,7 @@ export const StyledTop = styled.div`
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   grid-template-rows: minmax(0, 1fr);
   align-items: center;
-  padding: 0 20px;
+  padding: 0 2rem;
   *:last-child {
     justify-self: end;
   }

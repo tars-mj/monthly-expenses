@@ -19,7 +19,7 @@ import CategoryForm from '../organisms/CategoryForm';
 const StyledSection = styled.section`
   width: 100%;
 
-  max-width: 1200px;
+  max-width: 120rem;
   background-color: ${({ theme }) => theme.white};
   border-radius: 5px;
   box-shadow: 0 10px 15px -15px hsla(0, 0%, 0%, 0.4);
@@ -32,7 +32,7 @@ const StyledSection = styled.section`
     background-color: ${({ theme }) => theme.blue};
     border-radius: 5px 5px 0 0;
     grid-column: 1 / -1;
-    height: 60px;
+    height: 5rem;
   }
 `;
 
@@ -41,7 +41,7 @@ const StyledCategoryRow = styled.ul`
 
   align-items: center;
   list-style-type: none;
-  padding: 10px;
+  padding: 1rem;
   border-top: 1px solid ${({ theme }) => theme.gray};
   transition: background-color 0.15s ease-out;
   color: ${({ theme }) => theme.blue};
@@ -52,12 +52,13 @@ const StyledCategoryRow = styled.ul`
 const CategoryTag = styled.span`
   width: auto;
   background-color: ${({ theme }) => theme.gray};
-  padding: 5px;
-  border-radius: 4px;
+  padding: 0.5rem;
+  border-radius: 0.4rem;
   text-transform: lowercase;
   font-weight: ${({ theme }) => theme.fontThin};
+  font-size: ${({ theme }) => theme.fontSize.xs};
   color: ${({ theme }) => theme.green};
-  margin: 4px;
+  margin: 0.4rem;
   position: relative;
   cursor: pointer;
 `;
@@ -66,16 +67,14 @@ const AddCategory = styled.button`
   border: 0;
   background-color: ${({ theme }) => theme.green};
   color: ${({ theme }) => theme.white};
-  width: 2.9rem;
-  height: 2.9rem;
-  border-radius: 4px;
-  margin: 4px;
-
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 0.4rem;
+  margin: 0.4rem;
   &:focus {
     outline: none;
   }
   transition: transform 0.25s ease-out;
-
   &:hover {
     transform: scale(1.2);
   }

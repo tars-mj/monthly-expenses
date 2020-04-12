@@ -5,8 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTh, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 const BtnSmall = styled.button`
-  width: 31px;
-  height: 31px;
+  width: 3.1rem;
+  height: 3.1rem;
   border-radius: 50%;
   background-color: ${({ theme }) => theme.white};
   border: none;
@@ -22,7 +22,7 @@ const BtnSmall = styled.button`
 
 const StyledModalWrapper = styled.div`
   background-color: white;
-  padding: 10px;
+  padding: 1rem;
   position: fixed;
   top: 0;
   right: 0;
@@ -38,7 +38,7 @@ const StyledModalWrapper = styled.div`
 `;
 
 const StyledModalCard = styled.div`
-  width: 800px;
+  width: 80rem;
   height: auto;
   background-color: ${({ theme }) => theme.white};
   border-radius: 5px;
@@ -54,9 +54,9 @@ const StyledModalHeader = styled.div`
   height: 100%;
   background-color: ${({ theme }) => theme.blue};
   border-radius: 5px 5px 0 0;
-  padding: 10px;
+  padding: 1rem;
   display: grid;
-  grid-template-columns: auto 40px;
+  grid-template-columns: auto 4rem;
   align-items: center;
   color: ${({ theme }) => theme.lightBlue};
   font-weight: ${({ theme }) => theme.fontBold};
@@ -65,7 +65,7 @@ const StyledModalHeader = styled.div`
 
 const StyledContentModal = styled.div`
   width: 90%;
-  padding: 20px;
+  padding: 2rem;
 `;
 
 const Modal = ({ closeModalFn, children, btn, title }) => (

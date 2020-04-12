@@ -13,7 +13,7 @@ const StyledCard = styled.section`
   width: 100%;
   max-width: 120rem;
   background-color: ${({ theme }) => theme.white};
-  border-radius: 5px;
+  border-radius: 0.5rem;
   box-shadow: 0 10px 15px -15px hsla(0, 0%, 0%, 0.4);
 
   ul:first-child {
@@ -21,16 +21,16 @@ const StyledCard = styled.section`
     font-weight: ${({ theme }) => theme.fontBold};
     font-size: ${({ theme }) => theme.fontSize.s};
     background-color: ${({ theme }) => theme.blue};
-    border-radius: 5px 5px 0 0;
+    border-radius: 0.5rem 0.5rem 0 0;
     grid-column: 1 / -1;
     height: 100%;
   }
 
   div {
-    padding: 10px;
+    padding: 1rem;
     background-color: ${({ theme }) => theme.white};
-    border-radius: 0 0 5px 5px;
-    height: 100px;
+    border-radius: 0 0 0.5rem 0.5rem;
+    height: 10rem;
     display: flex;
     justify-content: center;
     align-items: flex-end;
@@ -39,16 +39,16 @@ const StyledCard = styled.section`
 
 const StyledCardRow = styled.ul`
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 160px repeat(2, 100px) 80px;
-  grid-auto-rows: 40px;
+  grid-template-columns: minmax(0, 1fr) 16rem repeat(2, 10rem) 8rem;
+  grid-auto-rows: 3rem;
   align-items: center;
   list-style-type: none;
-  padding: 10px;
+  padding: 1rem;
   border-top: 1px solid ${({ theme }) => theme.gray};
   transition: background-color 0.15s ease-out;
   color: ${({ theme }) => theme.blue};
   font-weight: ${({ theme }) => theme.fontLight};
-  font-size: ${({ theme }) => theme.fontSize.s};
+  font-size: ${({ theme }) => theme.fontSize.xs};
   &:hover {
     background-color: ${({ theme }) => theme.gray};
   }
@@ -63,9 +63,9 @@ const StatusIcon = styled.span`
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  width: 4rem;
-  height: 4rem;
-  font-size: ${({ theme }) => theme.fontSize.s};
+  width: 3rem;
+  height: 3rem;
+  font-size: ${({ theme }) => theme.fontSize.xs};
   color: ${({ theme }) => theme.white};
   background-color: ${({ theme }) => theme.gray};
 
@@ -85,7 +85,7 @@ const StatusIcon = styled.span`
 const StyledAmount = styled.li`
   display: grid;
   grid-template-columns: 0.25fr 0.25fr 2fr;
-  grid-gap: 5px;
+  grid-gap: 0.5rem;
   align-items: center;
 `;
 
@@ -254,7 +254,7 @@ const PaymentCard = ({ isSettingsPage }) => {
                       </BtnSmall>
                     </>
                   )}
-                  {actualAmount ? actualAmount.amount : amountExpected}
+                  {actualAmount ? `${actualAmount.amount}zł` : `${amountExpected}zł`}
                 </StyledAmount>
                 <li>{typePayment}</li>
                 <li>{`${deadline}-${selectedMonth}-${selectedYear}`}</li>

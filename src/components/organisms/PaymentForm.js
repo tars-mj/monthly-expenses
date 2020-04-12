@@ -11,7 +11,7 @@ import styled, { css } from 'styled-components';
 import { months } from '../../utils/months';
 
 const StyledSelect = styled(Select)`
-  margin: 10px 0;
+  margin: 1rem 0;
 `;
 
 const getYears = () => {
