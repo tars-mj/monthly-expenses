@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const StyledWrapperPage = styled.div`
   height: 100vh;
   display: grid;
+  overflow: hidden;
   grid-template-columns: minmax(0, 1fr);
   grid-template-rows: 8rem minmax(0, 1fr);
   grid-template-areas:

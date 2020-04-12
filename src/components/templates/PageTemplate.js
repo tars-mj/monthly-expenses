@@ -14,7 +14,7 @@ const StyledBoardLayout = styled.div`
   width: 100vw;
   height: 100vh;
   display: grid;
-
+  overflow: hidden;
   grid-template-columns: 10rem auto;
   grid-template-rows: minmax(0, 1fr);
   grid-template-areas: 'menu main';
@@ -91,6 +91,7 @@ const StyledMainLogo = styled.div`
 `;
 
 const StyledContent = styled.div`
+  overflow: hidden;
   grid-area: main;
 `;
 
