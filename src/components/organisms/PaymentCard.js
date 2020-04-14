@@ -121,7 +121,7 @@ const PaymentCard = ({ isSettingsPage }) => {
   }, [selectedYear, selectedMonth, expenses]);
 
   const selectStatusIcon = (history, deadline, typePayment) => {
-    const findStatus = history.find((x) => x.month === selectedMonth);
+    const findStatus = history.find((x) => x.month === selectedMonth && x.year === selectedYear);
     let status = findStatus ? findStatus.status : statusPaymentConst.waiting;
     let icon = faHourglassHalf;
     let deadlineComing = false;
